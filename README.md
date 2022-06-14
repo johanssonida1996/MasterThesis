@@ -1,9 +1,9 @@
 # MasterThesis
 
 <h1 align="center">My Master Thesis,</h1>
-<p align="center" First iteration of my portfolio website <a href="https://www.ijohansson.com" target="_blank">JobbPlatsen</a></p>
+<p align="center" First iteration of my portfolio website <a href="#" target="_blank">JobbPlatsen</a></p>
 <div align="center">
-   <img src="https://github.com/johanssonida1996/MasterThesis/blob/master/assets/images/BackgroundREADME"  width="400"/>
+   <img src="https://github.com/johanssonida1996/MasterThesis/blob/master/JobListing/wwwroot/assets/BackgroundREADME.PNG"  width="400"/>
 </div>
 
 ## 📜 Description
