@@ -17,7 +17,6 @@
 
   <ItemGroup>
     <Folder Include="wwwroot\lib\jquery-2\" />
-    <Folder Include="wwwroot\assets\" />
   </ItemGroup>
 
 </Project>
