@@ -1,0 +1,98 @@
+﻿@model UserInformationViewModel
+@using JobListing.Enum
+
+<div class="single-post d-flex flex-row">
+    <div class="thumb thumb-img">
+        @{
+            var imgStr = "/img/default-user-image.png";
+            if (!string.IsNullOrWhiteSpace(Model.Img))
+            {
+                imgStr = Model.Img;
+            }
+        }
+        <img src="@imgStr" alt="">
+        @*<img src="@Model.Img" alt="">*@
+    </div>
+    <div class="details">
+        <div class="title d-flex flex-row justify-content-between">
+            <div class="titles">
+                <a href="#"><h4>@Model.JobTitle</h4></a>
+                <h6>@Model.DisplayName</h6>
+                <p class="address"><span class="lnr lnr-map"></span> @Model.City.CityName</p>
+            </div>
+            <ul class="btns">
+                <li><a href="#"><span class="lnr lnr-heart"></span></a></li>
+                <li><a href="#">Kontakta</a></li>
+            </ul>
+        </div>
+        <p>
+            @Model.ShortDescription
+        </p>
+
+        @if (Model.WorkExperience == @WorkExperienceEnum.NollTillEtt)
+        {
+            <h5> Erfarenhet: 0-1 år</h5> 
+        }
+        @if (Model.WorkExperience == @WorkExperienceEnum.EttTillTre)
+        {
+
+            <h5> Erfarenhet: 1-3 år </h5> 
+
+        }
+        @if (Model.WorkExperience == @WorkExperienceEnum.TreTillFem)
+        {
+            <h5> Erfarenhet: 3-5 år </h5>
+        }
+        @if (Model.WorkExperience == @WorkExperienceEnum.FemEllerMer)
+        {
+            <h5> Erfarenhet: 5 eller mer år </h5>
+        }
+
+        <div class="thumb thumb-tags">
+            <ul class="tags">
+                <h5>Söker: </h5>
+                @foreach (var item in Model.WorkTypeList.Where(x => x.Selected))
+                {
+
+                    <li>
+                        <a href="#">
+                            @(item.Text)
+                        </a>
+                    </li>
+                }
+            </ul>
+        </div>
+    </div>
+</div>
+<div class="single-post job-details">
+    <h4 class="single-title">Vem är jag?</h4>
+    <p>
+        @Model.LongDescription
+    </p>
+</div>
+<div class="single-post job-experience">
+    <h4 class="single-title">Dokument</h4>
+    <ul>
+        @if (Model.files != null)
+        {
+            @for (var i = 0; i < Model.files.Count; i++)
+            {
+                <li>
+                    <i class="fa fa-file icon-list" aria-hidden="true"></i>
+                    <a class="files-name" asp-action="DownloadFile" asp-route-id="@Model.files[i].Id">@Model.files[i].FileName</a>
+                </li>
+            }
+        }
+        </ul>
+</div>
+<div class="single-post job-experience">
+    <h4 class="single-title">Utbildning</h4>
+    <ul>
+        <li>
+            <!-- <img src="img/pages/list.jpg" alt=""> -->
+            <i class="fa fa-bookmark icon-list" aria-hidden="true"></i>
+
+            <h5>@Model.Education.EducationName</h5>
+        </li>
+    </ul>
+</div>

@@ -1,0 +1,10 @@
+{
+  "version": "1.0",
+  "defaultProvider": "cdnjs",
+  "libraries": [
+    {
+      "library": "jquery-nice-select@1.1.0",
+      "destination": "wwwroot/js/jquery-nice-select.down/"
+    }
+  ]
+}

@@ -1,0 +1,7 @@
+﻿@model WorkerListViewModel
+
+
+@foreach (var worker in Model.Workers)
+{
+    <partial name="_card" model="worker" />
+}

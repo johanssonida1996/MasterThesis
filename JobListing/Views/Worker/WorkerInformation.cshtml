@@ -1,0 +1,301 @@
+﻿@model UserInformationViewModel
+@using JobListing.Enum
+
+
+
+<!-- start banner Area -->
+<section class="banner-area relative" id="home">
+    <div class="overlay overlay-bg"></div>
+    <div class="container">
+        <div class="row d-flex align-items-center justify-content-center">
+            <div class="about-content col-lg-12">
+                <h1 class="text-white">
+                    Mina sidor
+                </h1>
+                <p class="text-white"><a asp-controller="Home" asp-action="Index">Hem </a>  <span class="lnr lnr-arrow-right"></span>  <a asp-controller="Worker" asp-action="WorkerInformation"> Mina Uppgifter</a></p>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- End banner Area -->
+<!-- Start post Area -->
+<section class="post-area section-gap">
+    <div class="container home-user">
+        <form asp-controller="Worker" asp-action="WorkerInformation" method="post" enctype="multipart/form-data">
+            <div class="row justify-content-center d-flex">
+                <div class="col-lg-4 sidebar">
+                    <h3>Mina uppgifter </h3>
+                    <p>
+                        Här fyller du i alla uppgifter om dig själv som du vill att företag ska se. Tänk på att dessa uppgifter är synliga för alla som har ett konto på JobListing.
+                        När du delar med dig av filer, tänk på att inte ha med hemlig information så som hela personnumret eller liknande.
+                    </p>
+                    <br>
+                    <h6>Välj ny eller uppdatera profilbild här:</h6>
+                    <div class="home-user-dropdown single-slidebar">
+                        <div class="avatar-upload">
+                            <div class="avatar-edit">
+                                <input asp-for="ImageFile" type="file" id="imageUpload" accept=".png, .jpg, .jpeg"  />
+                                <label for="imageUpload"></label>
+                            </div>
+                            <div class="avatar-preview">
+                                @{ 
+                                    var imgStr = "/img/default-user-image.png";
+                                    if (!string.IsNullOrWhiteSpace(Model.Img))
+                                    {
+                                        imgStr = Model.Img;
+                                    }
+                                }
+                                @*<div id="imagePreview" style="background-image: url(@imgStr);">*@
+                                    <img id="imagePreview" src="@imgStr" />
+                                @*</div>*@
+                               
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-5 post-list">
+                    <div class="section-top-border user-top-border">
+                        <div class="row user-form-row">
+                            <div class="col-lg-10 col-md-8">
+                                <h3 class="mb-30">Dina uppgifter</h3>
+                                <div class="form-part">
+                                    <h5>Personliga uppgifter</h5>
+                                    <div class="input-group-icon mt-10">
+                                        <div class="icon"><i class="fa fa-user" aria-hidden="true"></i></div>
+                                        <input type="text" asp-for="FirstName" placeholder="Förnamn" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Förnamn'" class="single-input">
+                                        <span asp-validation-for="FirstName" class="text-danger"></span>
+                                    </div>
+                                    <div class="input-group-icon mt-10">
+                                        <div class="icon"><i class="fa fa-user" aria-hidden="true"></i></div>
+                                        <input type="text" asp-for="LastName" placeholder="Efternamn" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Efternamn'" class="single-input">
+                                        <span asp-validation-for="LastName" class="text-danger"></span>
+                                    </div>
+                                    <div class="input-group-icon mt-10">
+                                        <div class="icon"><i class="fa fa-envelope" aria-hidden="true"></i></div>
+                                        <input type="email" asp-for="Email" placeholder="Email" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Email'" class="single-input">
+                                        <span asp-validation-for="Email" class="text-danger"></span>
+                                    </div>
+                                    <div class="input-group-icon mt-10">
+                                        <div class="icon"><i class="fa fa-globe" aria-hidden="true"></i></div>
+                                        <div class="form-select" id="default-select">
+                                            <select asp-for="CityTest" asp-items='(new SelectList(Model.CityList, "Value", "Text"))'>
+                                                <option>Stad</option>
+                                            </select>
+                                            <span asp-validation-for="City" class="text-danger"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <br>
+                                <div class="form-part">
+                                    <h5>Jobb</h5>
+                                    <div class="input-group-icon mt-10">
+                                        <div class="icon"><i class="fa fa-briefcase" aria-hidden="true"></i></div>
+                                        <input type="text" asp-for="JobTitle" placeholder="Jobtitel" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Jobtitel'" class="single-input">
+                                        <span asp-validation-for="JobTitle" class="text-danger"></span>
+                                    </div>
+                                    <div class="input-group-icon mt-10">
+                                        <div class="icon"><i class="fa fa-briefcase" aria-hidden="true"></i></div>
+                                        <div class="form-select" id="default-select">
+                                            <select asp-for="Branch" asp-items='new SelectList(Model.CategoryList, "Value", "Text")'>
+                                                <option>Branch</option>
+                                            </select>
+                                            <span asp-validation-for="Branch" class="text-danger"></span>
+                                        </div>
+                                    </div>
+                                    <div class="input-group-icon mt-10">
+                                        <div class="icon"><i class="fa fa-book" aria-hidden="true"></i></div>
+                                        <div class="form-select" id="default-select">
+                                            <select asp-for="WorkExperience">
+                                                <option value="@WorkExperienceEnum.Erfarenhet">Erfarenhet (år)</option>
+                                                <option value="@WorkExperienceEnum.NollTillEtt">0-1 år</option>
+                                                <option value="@WorkExperienceEnum.EttTillTre">1-3 år</option>
+                                                <option value="@WorkExperienceEnum.TreTillFem">3-5 år</option>
+                                                <option value="@WorkExperienceEnum.FemEllerMer">5 år ></option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="input-group-icon mt-10">
+                                        <div class="icon"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></div>
+                                        <textarea asp-for="ShortDescription" id="the-textarea" maxlength="200" class="single-textarea single-input" placeholder="Kort beskrivning av tjänsten du söker" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Kort beskrivning av tjänsten du söker'"></textarea>
+                                        <div id="the-count" class="the-count">
+                                            <span id="current">0</span>
+                                            <span id="maximum">/ 200</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <br>
+                                <div class="form-part">
+                                    <h5>Presentation</h5>
+                                    <p>Här kan du berätta om vem du är och vad för typ av tjänst du söker</p>
+                                    <div class="input-group-icon mt-10">
+                                        <div class="icon"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></div>
+                                        <textarea asp-for="LongDescription" class="single-textarea user-textarea single-input" placeholder="Längre beskrivning om dig själv och vad du söker" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Kort beskrivning av tjänsten du söker'"></textarea>
+                                        <div id="the-count2" class="the-count">
+                                            <span id="current2">0</span>
+                                            <span id="maximum2">/ 2000</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <br>
+                                <div class="form-part">
+                                    <h5>Jobbtyper</h5>
+                                    <p>Bocka i den eller de jobtyper du är söker</p>
+                                    <div class="test-flex">
+                                        @for (var i = 0; i < Model.WorkTypeList.Count; i++)
+                                        {
+                                            <div class="switch-wrap d-flex justify-content-between">
+                                                <p>@Model.WorkTypeList[i].Text</p>
+                                                <div class="primary-checkbox">
+                                                    <input type="checkbox" id="@Model.WorkTypeList[i].Value" asp-for="@Model.WorkTypeList[i].Selected">
+                                                    <label for="@Model.WorkTypeList[i].Value"></label>
+                                                    <input type="hidden" asp-for="@Model.WorkTypeList[i].Value">
+                                                    <input type="hidden" asp-for="@Model.WorkTypeList[i].Text">
+                                                </div>
+                                            </div>
+                                        }
+                                    </div>
+                                </div>
+                                <br>
+                                <div class="form-part">
+                                    <h5>Jobbtyper</h5>
+                                    <p>Bocka i den eller de jobtyper du är söker</p>
+                                    <div class="test-flex">
+                                        @for (var i = 0; i < Model.EducationList.Count; i++)
+                                        {
+                                            <div class="switch-wrap d-flex justify-content-between">
+                                                <p>@Model.EducationList[i].EducationName</p>
+                                                <div class="primary-checkbox">
+                                                    @if (Model.Education != null && Model.Education.EducationId == Model.EducationList[i].EducationId)
+                                                    {
+                                                        <input type="checkbox" id="@Model.EducationList[i].EducationId" asp-for="@Model.EducationList[i].IsSelected" checked>
+                                                        <label for="@Model.EducationList[i].EducationId"></label>
+                                                        <input type="hidden" asp-for="@Model.EducationList[i].EducationId">
+                                                        <input type="hidden" asp-for="@Model.EducationList[i].EducationName">
+                                                    }
+                                                    else
+                                                    {
+                                                        <input type="checkbox" id="@Model.EducationList[i].EducationId" asp-for="@Model.EducationList[i].IsSelected">
+                                                        <label for="@Model.EducationList[i].EducationId"></label>
+                                                        <input type="hidden" asp-for="@Model.EducationList[i].EducationId">
+                                                        <input type="hidden" asp-for="@Model.EducationList[i].EducationName">
+                                                    }
+                                                </div>
+                                            </div>
+                                        }
+                                    </div>
+                                </div>
+                                <br>
+                                <div class="form-part">
+                                    <h5>Filer</h5>
+                                    <p>Här kan du lägga välja att lägga upp filer så som CV, Personligt brev eller annat du vill dela med dig av.</p>
+
+                                    @if (Model.files != null && Model.files.Count > 0)
+                                    {
+                                        var fileOne = Model.files[0];
+                                        <div class="form-group-files justify-content-center">
+                                            <div class="input-group-icon mt-10">
+                                                <div class="icon"><i class="fa fa-file" aria-hidden="true"></i></div>
+                                                <input type="text" placeholder="@fileOne.FileName" onfocus="this.placeholder = ''" onblur="this.placeholder = '@fileOne.FileName'" class="single-input">
+                                            </div>
+                                            <div class="input-group-btn mt-10">
+                                                <span class="fileUpload-delete genric-btn danger reset-user radius">
+                                                    <a class="upl" asp-action="DeleteFile" asp-route-id="@fileOne.Id">Ta bort fil</a>
+                                                </span>
+                                            </div>
+                                        </div>
+                                    }
+                                    else
+                                    {
+                                        <div class="form-group-files justify-content-center">
+                                            <div class="input-group-icon mt-10">
+                                                <div class="icon"><i class="fa fa-file" aria-hidden="true"></i></div>
+                                                <input type="text" placeholder="Ladda upp fil" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Ladda upp fil'" class="single-input">
+                                            </div>
+                                            <div class="input-group-btn mt-10">
+                                                <span class="fileUpload genric-btn success radius">
+                                                    <span class="upl" id="upload">Välj fil</span>
+                                                    <input asp-for="FileOne" type="file" class="upload up" id="up" />
+                                                </span>
+                                            </div>
+                                        </div>
+                                    }
+                                    @if (Model.files != null && Model.files.Count > 1)
+                                    {
+                                        var fileTwo = Model.files[1];
+                                        <div class="form-group-files justify-content-center">
+                                            <div class="input-group-icon mt-10">
+                                                <div class="icon"><i class="fa fa-file" aria-hidden="true"></i></div>
+                                                <input type="text" placeholder="@fileTwo.FileName" onfocus="this.placeholder = ''" onblur="this.placeholder = '@fileTwo.FileName'" class="single-input">
+                                            </div>
+                                            <div class="input-group-btn mt-10">
+                                                <span class="fileUpload-delete genric-btn danger reset-user radius">
+                                                    <a class="upl" asp-action="DeleteFile" asp-route-id="@fileTwo.Id">Ta bort fil</a>
+                                                </span>
+                                            </div>
+                                        </div>
+                                    }
+                                    else
+                                    {
+                                        <div class="form-group-files justify-content-center">
+                                            <div class="input-group-icon mt-10">
+                                                <div class="icon"><i class="fa fa-file" aria-hidden="true"></i></div>
+                                                <input type="text" placeholder="Ladda upp fil" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Ladda upp fil'" class="single-input">
+                                            </div>
+                                            <div class="input-group-btn mt-10">
+                                                <span class="fileUpload genric-btn success radius">
+                                                    <span class="upl" id="upload">Välj fil</span>
+                                                    <input asp-for="FileTwo" type="file" class="upload up" id="up" />
+                                                </span>
+                                            </div>
+                                        </div>
+                                    }
+
+                                    @if (Model.files != null && Model.files.Count > 2)
+                                    {
+                                        var fileThree = Model.files[2];
+                                        <div class="form-group-files justify-content-center">
+                                            <div class="input-group-icon mt-10">
+                                                <div class="icon"><i class="fa fa-file" aria-hidden="true"></i></div>
+                                                <input type="text" placeholder="@fileThree.FileName" onfocus="this.placeholder = ''" onblur="this.placeholder = '@fileThree.FileName'" class="single-input">
+                                            </div>
+                                            <div class="input-group-btn mt-10">
+                                                <span class="fileUpload-delete genric-btn danger reset-user radius">
+                                                    <a class="upl" asp-action="DeleteFile" asp-route-id="@fileThree.Id">Ta bort fil</a>
+                                                </span>
+                                            </div>
+                                        </div>
+                                    }
+                                    else
+                                    {
+                                        <div class="form-group-files justify-content-center">
+                                            <div class="input-group-icon mt-10">
+                                                <div class="icon"><i class="fa fa-file" aria-hidden="true"></i></div>
+                                                <input type="text" placeholder="Ladda upp fil" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Ladda upp fil'" class="single-input">
+                                            </div>
+                                            <div class="input-group-btn mt-10">
+                                                <span class="fileUpload genric-btn success radius">
+                                                    <span class="upl" id="upload">Välj fil</span>
+                                                    <input asp-for="FileThree" type="file" class="upload up" id="up" />
+                                                </span>
+                                            </div>
+                                        </div>
+                                    }
+                                    <div class="form-group-files justify-content-center">
+                                        <div class="form-part form-part-submit">
+                                            <div class="submit-user-form">
+                                                <button type="submit" class="genric-btn primary submit-user radius">Spara</button>
+                                            </div>
+                                            <div class="submit-user-form">
+                                                <button type="reset" class="genric-btn danger reset-user radius">Ta bort</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+        </form>
+    </div>
+</section>
+<!-- End post Area -->

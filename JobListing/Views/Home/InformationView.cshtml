@@ -1,0 +1,47 @@
+﻿@model WorkerListViewModel
+<!-- start banner Area -->
+<section class="banner-area relative" id="home">
+    <div class="overlay overlay-bg"></div>
+    <div class="container">
+        <div class="row d-flex align-items-center justify-content-center">
+            <div class="about-content col-lg-12">
+                <h1 class="text-white">
+                    Information
+                </h1>
+                <p class="text-white"><a asp-controller="Home" asp-action="Index">Hem </a>  <span class="lnr lnr-arrow-right"></span>  <a asp-controller="Home" asp-action="InformationView"> Detaljer</a></p>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- End banner Area -->
+<!-- Start post Area -->
+<section class="post-area section-gap">
+    <div class="container">
+        <div class="row justify-content-center d-flex">
+            <div class="col-lg-8 post-list">
+
+               <partial name="_informationCard" model="Model.Worker" />
+
+                <partial name="_LongInformationCard" model="Model.Worker"   />
+               
+            </div>
+            <div class="col-lg-4 sidebar">
+                <div class="single-slidebar">
+                    <h4>Populära Annonser</h4>
+                    <div class="active-relatedjob-carusel">
+                        @if (Model != null)
+                        {
+                            @foreach (var worker in Model.PopularWorkers)
+                            {
+
+                                <partial name="_singleSlidebarCard" model="worker" />
+                            }
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- End post Area -->
+

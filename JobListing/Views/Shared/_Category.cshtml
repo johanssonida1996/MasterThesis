@@ -1,0 +1,16 @@
+﻿@*@model SelectListItem<Category>*@
+
+
+
+
+
+<ul class="cat-list">
+
+    @foreach (var category in Model.CategoryList)
+    {
+        <li>
+            <a class="justify-content-between d-flex" asp-controller="Home" asp-action="List"
+               asp-route-category="@category.Text"><p>@category.Text</p><span>0</span></a>
+        </li>
+    }
+</ul>

@@ -1,0 +1,86 @@
+﻿     <!-- start banner Area -->
+<section class="banner-area relative" id="home">
+    <div class="overlay overlay-bg"></div>
+    <div class="container">
+        <div class="row d-flex align-items-center justify-content-center">
+            <div class="about-content col-lg-12">
+                <h1 class="text-white">
+                    Mina sidor
+                </h1>
+                <p class="text-white"><a asp-controller="Home" asp-action="Index">Hem </a>  <span class="lnr lnr-arrow-right"></span>  <a asp-controller="Company" asp-action="CompanySettings"> Kontoinställningar</a></p>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- End banner Area -->
+<!-- Start post Area -->
+<section class="post-area section-gap">
+    <div class="container home-user">
+        <div class="row justify-content-center d-flex">
+            <div class="col-lg-4 sidebar">
+                <h3>Inställningar</h3>
+                <p>
+                    Här har du möjlighet att ändra inställningar så som att ta bort konto, byta lösenord eller uppdatera emailadress.
+                </p>
+                <br>
+                <h6>Ta bort mitt konto här:</h6>
+                <div class="home-user-dropdown single-slidebar user-options-div">
+                    <h6>Jag vill inte längre har kvar mitt konto på JobListing.</h6>
+                    <a href="#" class="genric-btn danger reset-user radius">Ta bort konto</a>
+                </div>
+            </div>
+            <div class="col-lg-5 post-list">
+                <div class="section-top-border user-top-border">
+                    <div class="row user-form-row">
+                        <div class="col-lg-10 col-md-8">
+                            <form action="#">
+                                <div class="form-part">
+                                    <h5>Byt lösenord</h5>
+                                    <div class="input-group-icon mt-10">
+                                        <div class="icon"><i class="fa fa-lock" aria-hidden="true"></i></div>
+                                        <input type="password" name="first_name" placeholder="Byt Lösenord" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Byt Lösenord'" required class="single-input">
+                                    </div>
+                                    <div class="input-group-icon mt-10">
+                                        <div class="icon"><i class="fa fa-lock" aria-hidden="true"></i></div>
+                                        <input type="password" name="last_name" placeholder="Skriv in nytt lösenord igen" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Skriv in nytt lösenord igen'" required class="single-input">
+                                    </div>
+                                </div>
+                                <div class="submit-user-password">
+                                    <a href="#" class="genric-btn primary submit-user radius">Spara</a>
+                                </div>
+                            </form>
+
+                            <br>
+                            <form action="#">
+                                <div class="form-part">
+                                    <h5>Nyhetsuppdatyeringar / notiser</h5>
+                                    <p>Bocka i om du vill ha nyhetsuppdateringar och notiser skickat till din mail: </p>
+                                    <div class="test-flex test-flex2">
+                                        <div class="switch-wrap d-flex justify-content-between">
+                                            <p>Nyhetsbrev</p>
+                                            <div class="primary-checkbox">
+                                                <input type="checkbox" id="news1">
+                                                <label for="news1"></label>
+                                            </div>
+                                        </div>
+                                        <div class="switch-wrap d-flex justify-content-between">
+                                            <p>Notiser</p>
+                                            <div class="primary-checkbox">
+                                                <input type="checkbox" id="notis1">
+                                                <label for="notis1"></label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="submit-user-password">
+                                        <a href="#" class="genric-btn primary submit-user radius">Spara</a>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- End post Area -->

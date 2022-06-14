@@ -1,0 +1,66 @@
+﻿@model FavoriteCartViewModel
+
+<!-- start banner Area -->
+<section class="banner-area relative" id="home">
+    <div class="overlay overlay-bg"></div>
+    <div class="container">
+        <div class="row d-flex align-items-center justify-content-center">
+            <div class="about-content col-lg-12">
+                <h1 class="text-white">
+                    Mina sidor
+                </h1>
+                <p class="text-white"><a asp-controller="Home" asp-action="Index">Hem </a>  <span class="lnr lnr-arrow-right"></span>  <a asp-controller="Company" asp-action="Index"> Profil</a></p>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- End banner Area -->
+<!-- Start post Area -->
+<section class="post-area section-gap">
+    <div class="container home-user">
+        <div class="row justify-content-center d-flex">
+            <div class="col-lg-4 sidebar">
+
+                <h3>Mina favoriter! </h3>
+
+            </div>
+            <div class="col-lg-5 post-list">
+                <h2>Dina favoriter</h2>
+                <h4>Här är en lista på de jobbsökande som du sparat</h4>
+                <table class="table table-bordered table-striped">
+                    <thead>
+                        <tr>
+                            <th class="text-left">Namn</th>
+                            <th class="text-left">Branch</th>
+                            <th class="text-left">Jobtitel</th>
+                            <th class="text-left">Email</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var line in Model.FavoriteCart.FavoriteCartItems)
+                        {
+                            <tr>
+                                <td class="text-left">@line.Worker.DisplayName</td>
+                                <td class="text-left">@line.Worker.Category.CategoryName</td>
+                                <td class="text-left">@line.Worker.JobTitle</td>
+                                <td class="text-left">@line.Worker.Email</td>
+                                @*<td class="text-right">
+                                        @((line.Amount * line.Pie.Price).ToString("c"))
+                                    </td>*@
+                            </tr>
+                        }
+                    </tbody>
+                    @*<tfoot>
+                            <tr>
+                                <td colspan="3" class="text-right">Total:</td>
+                                <td class="text-right">
+                                    @Model.FavoriteCartTotal.ToString("c")
+                                </td>
+                            </tr>
+                        </tfoot>*@
+                </table>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- End post Area -->

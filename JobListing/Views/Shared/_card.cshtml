@@ -1,0 +1,101 @@
+﻿@model Worker
+@using JobListing.Enum
+@inject SignInManager<ApplicationUser> signInManager;
+
+
+<div class="single-post d-flex flex-row">
+    <div class="thumb thumb-img">
+        @{
+            var imgStr = "/img/default-user-image.png";
+            if (!string.IsNullOrWhiteSpace(Model.ImageUrl))
+            {
+                imgStr = Model.ImageUrl;
+            }
+        }
+        <img src="@imgStr" alt="">
+    </div>
+    <div class="details">
+        <div class="title d-flex flex-row justify-content-between">
+            <div class="titles">
+                <a asp-controller="Home" asp-action="InformationView" asp-route-id="@Model.Id"><h4>@Model.JobTitle</h4></a>
+                <h6>@Model.DisplayName</h6>
+                <p class="address"><span class="lnr lnr-map"></span> @Model.City.CityName</p>
+            </div>
+            <ul class="btns">
+                @if (signInManager.IsSignedIn(User) && User.IsInRole("Företag"))
+                {
+                    <li>
+                        <a asp-controller="Company"
+                           asp-action="AddToFavoriteCart"
+                           asp-route-Id="@Model.Id"><span class="lnr lnr-heart"></span></a>
+                    </li>
+                }
+                <li>
+                    @if (signInManager.IsSignedIn(User) && User.IsInRole("Företag"))
+                    {
+                        <a asp-controller="Home" asp-action="InformationView" asp-route-id="@Model.Id">Mer info</a>
+                    }
+                    else
+                    {
+                        <a data-toggle="modal" data-target="#exampleModal">Mer info</a>
+                        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal-dialog modal-dialog-centered">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="exampleModalLabel">Ajdå!</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body">
+                                        Du måste vara registrerad som företag för att kunna se denna informtaion
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Stäng</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </li>
+            </ul>
+        </div>
+        <p>
+            @Model.ShortDescription
+        </p>
+
+        @if (Model.WorkExperience == @WorkExperienceEnum.NollTillEtt.ToString())
+        {
+            <h5> Erfarenhet: 0-1 år</h5>
+        }
+        @if (Model.WorkExperience == @WorkExperienceEnum.EttTillTre.ToString())
+        {
+
+            <h5> Erfarenhet: 1-3 år </h5>
+
+        }
+        @if (Model.WorkExperience == @WorkExperienceEnum.TreTillFem.ToString())
+        {
+            <h5> Erfarenhet: 3-5 år </h5>
+        }
+        @if (Model.WorkExperience == @WorkExperienceEnum.FemEllerMer.ToString())
+        {
+            <h5> Erfarenhet: 5 eller mer år </h5>
+        }
+
+        <div class="thumb thumb-tags">
+            <ul class="tags">
+                <h5>Söker: </h5>
+                @foreach (var item in Model.WorkTypes)
+                {
+
+                    <li class="worktypes">
+                        <a href="#">
+                            @item.worktype.WorkTypesName
+                        </a>
+                    </li>
+                }
+            </ul>
+        </div>
+    </div>
+</div>

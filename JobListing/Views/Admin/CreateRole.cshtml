@@ -1,0 +1,51 @@
+﻿@model CreateRoleViewModel
+@{
+    ViewData["Title"] = "Create New Role";
+}
+
+<!-- start banner Area -->
+<section class="banner-area relative" id="home">
+    <div class="overlay overlay-bg"></div>
+    <div class="container">
+        <div class="row d-flex align-items-center justify-content-center">
+            <div class="about-content col-lg-12">
+                <h1 class="text-white">
+                    Admin
+                </h1>
+                <p class="text-white"><a asp-controller="Home" asp-action="Index">Hem </a>  <span class="lnr lnr-arrow-right"></span>  <a asp-controller="Admin" asp-action="CreateRole"> Skapa Roll</a></p>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- End banner Area -->
+
+<section class="post-area section-gap">
+    <div class="container home-user">
+        <div class="row justify-content-center d-flex">
+            <div class="col-lg-4 sidebar">
+                <h1>@ViewData["Title"]</h1>
+            </div>
+            <div class="col-lg-5 post-list">
+                <div class="row">
+                    <div class="col-md-4">
+                        <form method="post">
+                            <h4>Create a new role</h4>
+                            <hr />
+                            <div asp-validation-summary="All" class="text-danger"></div>
+                            <div class="form-group">
+                                <label asp-for="RoleName"></label>
+                                <input asp-for="RoleName" class="form-control" />
+                                <span asp-validation-for="RoleName" class="text-danger"></span>
+                            </div>
+                            <button type="submit" class="btn btn-primary">Create Role</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+
+

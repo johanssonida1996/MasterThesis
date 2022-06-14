@@ -1,0 +1,25 @@
+﻿@model Worker
+<div class="single-popular-post d-flex flex-row">
+    <div class="thumb">
+        @{
+            var imgStr = "/img/default-user-image.png";
+            if (!string.IsNullOrWhiteSpace(Model.ImageUrl))
+            {
+                imgStr = Model.ImageUrl;
+            }
+        }
+        <img src="@imgStr" alt="">
+        <a class="btns text-uppercase" asp-controller="Home" asp-action="InformationView"  asp-route-id="@Model.Id">Mer Info</a>
+    </div>
+    <div class="details">
+        <a href="#"><h4>@Model.JobTitle</h4></a>
+        <h6>@Model.City.CityName</h6>
+        <p>
+            @Model.ShortDescription
+        </p>
+    </div>
+</div>
+
+
+
+

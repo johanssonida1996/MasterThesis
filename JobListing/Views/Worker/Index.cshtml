@@ -1,0 +1,63 @@
+﻿@model UserInformationViewModel
+
+  	<!-- start banner Area -->
+<section class="banner-area relative" id="home">
+    <div class="overlay overlay-bg"></div>
+    <div class="container">
+        <div class="row d-flex align-items-center justify-content-center">
+            <div class="about-content col-lg-12">
+                <h1 class="text-white">
+                    Mina sidor
+                </h1>
+                <p class="text-white"><a asp-controller="Home" asp-action="Index">Hem </a>  <span class="lnr lnr-arrow-right"></span>  <a asp-controller="Worker" asp-action="Index"> Profil</a></p>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- End banner Area -->
+<!-- Start post Area -->
+<section class="post-area section-gap">
+    <div class="container home-user">
+        <div class="row justify-content-center d-flex">
+            <div class="col-lg-4 sidebar">
+
+                <h3>Välkommen till mina sidor! </h3>
+                <p>
+                    I menyn till vänster kan du lätt hitta runt på dina sidor. För att synas på sidan behöver du fylla i lite uppgifter om dig själv.
+                    För att göra det kan du gå till <a asp-controller="Worker" asp-action="WorkerInformation" class="home-user-a">Mina uppgifter</a>. När du gjort det kan du till höger se hur dina uppgifter kommer
+                    synas för andra användare.
+                </p>
+                <br>
+                <h6>Här kan du välja vilken typ av profil du vill visa:</h6>
+                <div class="home-user-dropdown single-slidebar">
+                    <div class="switch-wrap d-flex own-check-class">
+
+                        <p>Visa fullständiga uppgifter</p>
+                        <div class="primary-checkbox own-check">
+                            <input type="checkbox" id="check1" checked>
+                            <label for="check1"></label>
+                        </div>
+                    </div>
+                    <div class="switch-wrap d-flex own-check-class">
+
+                        <p>Visa anpassade uppgifter</p>
+                        <div class="primary-checkbox own-check">
+                            <input type="checkbox" id="check2">
+                            <label for="check2"></label>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <div class="col-lg-5 post-list">
+                @if (Model != null)
+                {
+                    <partial name="_ShowInformationCards" data="@Model"/>
+                }
+
+            </div>
+
+        </div>
+    </div>
+</section>
+<!-- End post Area -->

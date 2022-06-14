@@ -1,0 +1,73 @@
+﻿@model IEnumerable<ApplicationUser>
+
+@{
+    ViewBag.Title = "All Users";
+}
+
+<!-- start banner Area -->
+<section class="banner-area relative" id="home">
+    <div class="overlay overlay-bg"></div>
+    <div class="container">
+        <div class="row d-flex align-items-center justify-content-center">
+            <div class="about-content col-lg-12">
+                <h1 class="text-white">
+                    Admin
+                </h1>
+                <p class="text-white"><a asp-controller="Home" asp-action="Index">Hem </a>  <span class="lnr lnr-arrow-right"></span>  <a asp-controller="Admin" asp-action="ListUsers"> Lista Användare</a></p>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- End banner Area -->
+
+<section class="post-area section-gap">
+    <div class="container home-user">
+        <div class="row justify-content-center d-flex">
+            <div class="col-lg-4 sidebar">
+                <h1>All Users</h1>
+            </div>
+            <div class="col-lg-5 post-list">
+
+                @if (Model.Any())
+                {
+                    <a class="btn btn-primary" style="width:auto" asp-action="Register" asp-controller="Admin">
+                        Add new user
+                    </a>
+
+                    foreach (var user in Model)
+                    {
+                        <div class="card mb-3">
+                            <div class="card-header">
+                                User Id: @user.Id
+                            </div>
+                            <div class="card-body">
+                                <h5 class="card-title">@user.UserName</h5>
+                            </div>
+                            <div class="card-footer">
+                                <form asp-action="DeleteUser" asp-route-id="@user.Id" method="post">
+                                    <a class="btn btn-primary" asp-action="EditUser" asp-controller="Admin" asp-route-id="@user.Id">Edit</a>
+                                    <button type="submit" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this user : @user.UserName')">Delete</button>
+                                </form>
+                            </div>
+                        </div>
+                    }
+                }
+                else
+                {
+                    <div class="card">
+                        <div class="card-header">
+                            <h3>No users created yet</h3>
+                        </div>
+                        <div class="card-body">
+                            <h5 class="card-title">Use button below to create a user</h5>
+                            <a class="btn btn-primary" style="width:auto" asp-action="Register" asp-controller="Admin">Add new user</a>
+                        </div>
+
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</section>
+
+

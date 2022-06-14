@@ -1,0 +1,32 @@
+﻿@model Worker
+
+<div class="single-post job-details">
+    <h4 class="single-title">Vem är jag?</h4>
+    <p>
+        @Model.LongDescription
+    </p>
+</div>
+<div class="single-post job-experience">
+    <h4 class="single-title">Dokument</h4>
+    <ul>
+        @if (Model != null)
+        {
+            @for (var i = 0; i < Model.Files.Count; i++)
+            {
+                <li>
+                    <i class="fa fa-file icon-list" aria-hidden="true"></i>
+                    <a class="files-name" asp-action="DownloadFile" asp-route-id="@Model.Files[i].Id">@Model.Files[i].FileName</a>
+                </li>
+            }
+        }
+    </ul>
+</div>
+<div class="single-post job-experience">
+    <h4 class="single-title">Utbildning</h4>
+    <ul>
+        <li>
+            <i class="fa fa-bookmark icon-list" aria-hidden="true"></i>
+            <h5>@Model.Education.EducationName</h5>
+            </li>
+        </ul>
+</div>
